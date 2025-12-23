@@ -1,0 +1,27 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.card {
+  border-radius: 0.5rem;
+}
+
+.ver-detalle {
+  margin-top: 0.5rem;
+}
+
+/*# sourceMappingURL=main.css.map */
