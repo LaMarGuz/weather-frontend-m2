@@ -1,61 +1,121 @@
-# weather-frontend-m2
-app de clima
+# Weather Frontend – App de Clima
 
-Proyecto frontend desarrollado como parte de una actividad académica, enfocado en la organización de estilos CSS utilizando Sass y metodologías de modularización.
+Aplicación web de clima desarrollada como proyecto académico, que muestra información climática real en tiempo real para distintas ciudades de Chile.
+
+El proyecto utiliza Programación Orientada a Objetos (POO), JavaScript moderno (ES6+) y consumo de una API externa de clima mediante programación asíncrona.
+
+---
 
 ## 📌 Descripción del proyecto
-La aplicación muestra un listado de localidades organizadas en cards. Cada card permite acceder a un detalle de la localidad seleccionada, almacenando la información mediante `localStorage`.
 
-El diseño está construido sobre Bootstrap 5 y estilos personalizados compilados desde Sass.
+La aplicación presenta un listado de localidades en la vista principal (Home).  
+Cada localidad muestra su clima actual y permite acceder a una vista de detalle, donde se despliega:
 
-## Modelado de datos
+- Clima actual
+- Pronóstico semanal
+- Estadísticas de la semana
+- Alertas climáticas simples
 
-La aplicación trabaja con un arreglo de objetos llamado `lugares`, donde cada elemento representa una ciudad del país.  
-Cada ciudad contiene su nombre, región y un arreglo `pronosticoSemanal` con la información climática de los siete días de la semana.
+La navegación entre vistas se realiza mediante almacenamiento en `localStorage`.
 
-Cada día del pronóstico incluye:
-- Temperatura mínima
-- Temperatura máxima
-- Tipo de clima (soleado, nublado o lluvioso)
+---
 
-Este enfoque permite separar completamente los datos del HTML y manejarlos de forma dinámica desde JavaScript.
+## 🧱 Estructura del proyecto y clases
 
-## Estadísticas semanales
+### 🔹 `WeatherApp`
+Clase principal que controla la lógica de la aplicación.
 
-A partir del pronóstico semanal de cada ciudad, la aplicación calcula dinámicamente:
-- Temperatura mínima de la semana
-- Temperatura máxima de la semana
-- Temperatura promedio semanal
-- Cantidad de días por tipo de clima (soleados, nublados y lluviosos)
+Responsabilidades:
+- Cargar y renderizar las ciudades en la vista Home
+- Obtener los datos de clima desde la API
+- Renderizar el detalle de una ciudad
+- Calcular estadísticas semanales
+- Generar alertas climáticas
 
-Además, se genera un resumen textual automático del estado del tiempo semanal.  
-Por ejemplo:
-- “Semana mayormente soleada”
-- “Semana fría con algunas lluvias”
-- “Semana mayormente nublada”
+### 🔹 `ApiClient`
+Clase encargada del consumo de la API de clima.
 
-El resumen se obtiene comparando la cantidad de días según el tipo de clima utilizando condicionales en JavaScript.
+Responsabilidades:
+- Realizar peticiones HTTP usando `fetch`
+- Manejar asincronía con `async / await`
+- Procesar la respuesta JSON
 
-## 🎨 Organización de estilos
-Para los estilos se utilizó **Sass** como preprocesador, lo que permite dividir el CSS en archivos más pequeños y mantenibles.
+### 🔹 `data.js`
+Archivo que contiene únicamente información base de las ciudades:
+- Nombre
+- Región
+- Coordenadas geográficas (latitud y longitud)
 
-Se aplicó principalmente la metodología **BEM (Block Element Modifier)** para:
-- Mejorar la legibilidad del código
-- Facilitar el mantenimiento
-- Evitar conflictos entre estilos
+No contiene datos climáticos fijos.
 
-La estructura Sass separa:
-- estilos base
-- componentes reutilizables
-- layout general
+---
+
+## 🌍 API de Clima utilizada
+
+La aplicación consume datos reales en tiempo real desde la API pública **Open-Meteo**.
+
+- 🌐 Sitio oficial: https://open-meteo.com
+- 📡 Endpoint base: https://api.open-meteo.com/v1/forecast
+- 🔑 No requiere API Key
+- ⏱️ Datos actualizados automáticamente
+
+Datos utilizados:
+- Temperatura actual
+- Pronóstico diario (mínima y máxima)
+- Códigos de estado del clima
+
+---
+
+## 📊 Estadísticas semanales
+
+A partir del pronóstico semanal obtenido desde la API, la aplicación calcula dinámicamente:
+
+- Temperatura mínima semanal
+- Temperatura máxima semanal
+- Temperatura promedio
+- Cantidad de días soleados, nublados y lluviosos
+
+---
+
+## 🚨 Alertas climáticas
+
+Se implementa una sección de alertas simples, basada en reglas:
+
+- 🔥 **Alerta de calor**: si el promedio semanal supera los 25 °C
+- 🌧️ **Semana lluviosa**: si hay 3 o más días con lluvia
+
+Estas alertas se generan automáticamente a partir de los datos de la API.
+
+---
+
+## 🎨 Estilos y maquetación
+
+- Bootstrap 5
+- Sass como preprocesador CSS
+- Metodología BEM para la organización de clases
+- Estilos modulares (_base, _layout, _components, _variables)
+
+---
 
 ## 🛠️ Tecnologías utilizadas
+
 - HTML5
 - CSS3
 - Sass
 - Bootstrap 5
-- JavaScript (ES6)
+- JavaScript ES6+
+- Fetch API
+- Programación Orientada a Objetos
 - Git y GitHub
 
+---
+
+## 🚀 Ejecución del proyecto
+
+Para que la aplicación funcione correctamente, debe ejecutarse desde un servidor local (por ejemplo, Live Server), ya que utiliza módulos ES6 y consumo de API externa.
+
+---
+
 ## 🔗 Repositorio en GitHub
+
 https://github.com/LaMarGuz/weather-frontend-m2
